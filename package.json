@@ -5,5 +5,8 @@
   "author": "Mike McGrath <mike@mikemcgrathonline.us>",
   "license": "MIT",
   "private": false,
-  "devDependencies": {}
+  "devDependencies": {},
+  "dependencies": {
+    "fs-extra": "^10.1.0"
+  }
 }

@@ -1,6 +1,6 @@
 #! /usr/bin/env node
-import fs from "fs-extra";
-import { execSync } from "child_process";
+const fs = require("fs-extra");
+const { execSync } require("child_process");
 
 const runCommand = (command) => {
   try {

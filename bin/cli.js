@@ -14,7 +14,7 @@ const runCommand = (command) => {
 const repoName = process.argv[2];
 const gitCheckoutCommand = `git clone --depth=1 git@github.com:mjmcgrath2010/graphql-api-template.git ${repoName}`;
 const installCheckoutCommand = `cd ${repoName} && yarn install`;
-const setupCommand = `yarn setup`;
+const setupCommand = `cd ${repoName} && yarn setup`;
 
 /**
  * CREATE
@@ -48,4 +48,7 @@ if (!setup) {
   process.exit(-1);
 }
 
-console.log("run `yarn dev` to get started!");
+console.log(`
+🎉 Complete!
+To get started, run:
+cd ${repoName} && yarn start to begin!`);

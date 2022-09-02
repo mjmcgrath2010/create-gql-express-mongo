@@ -13,11 +13,11 @@ const runCommand = (command) => {
 
 const repoName = process.argv[2];
 const gitApiCheckoutCommand = `git clone --depth=1 git@github.com:mjmcgrath2010/graphql-api-template.git ${repoName}-api`;
-const installCheckoutCommandApi = `cd ${repoName}-api && yarn install`;
+const installCheckoutCommandApi = `cd ${repoName}-api && yarn install --silent`;
 const setupCommandApi = `cd ${repoName}-api && yarn setup`;
 
 const gitCheckoutCommandWeb = `git clone --depth=1 git@github.com:mjmcgrath2010/material-ui-dashboard-template.git ${repoName}-web`;
-const installCheckoutCommandWeb = `cd ${repoName}-web && yarn install`;
+const installCheckoutCommandWeb = `cd ${repoName}-web && yarn install --silent`;
 const setupCommandWeb = `cd ${repoName}-web && yarn setup`;
 
 /**
@@ -58,4 +58,10 @@ if (!setupApi || !setupWeb) {
 console.log(`
 🎉 Complete!
 To get started, run:
-cd ${repoName} && yarn start to begin!`);
+
+cd ${repoName}-web && yarn start
+// new terminal
+cd ${repoName}-api && yarn dev
+
+🚀🚀🚀🚀
+`);

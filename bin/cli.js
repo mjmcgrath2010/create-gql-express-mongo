@@ -12,13 +12,17 @@ const runCommand = (command) => {
 };
 
 const repoName = process.argv[2];
-const gitApiCheckoutCommand = `git clone --depth=1 git@github.com:mjmcgrath2010/graphql-api-template.git ${repoName}-api`;
-const installCheckoutCommandApi = `cd ${repoName}-api && yarn --silent`;
-const setupCommandApi = `cd ${repoName}-api && yarn setup`;
+const gitApiCheckoutCommand = `mkdir ${repoName} && cd ${repoName} && git clone --depth=1 git@github.com:mjmcgrath2010/graphql-api-template.git api`;
+const installCheckoutCommandApi = `cd ${repoName}/api && yarn --silent`;
+const setupCommandApi = `cd ${repoName}/api && yarn setup`;
 
-const gitCheckoutCommandWeb = `git clone --depth=1 git@github.com:mjmcgrath2010/material-ui-dashboard-template.git ${repoName}-web`;
-const installCheckoutCommandWeb = `cd ${repoName}-web && yarn --silent`;
-const setupCommandWeb = `cd ${repoName}-web && yarn setup`;
+const gitCheckoutCommandWeb = `cd ${repoName} && git clone --depth=1 git@github.com:mjmcgrath2010/material-ui-dashboard-template.git web`;
+const installCheckoutCommandWeb = `cd ${repoName}/web && yarn --silent`;
+const setupCommandWeb = `cd ${repoName}/web && yarn setup`;
+const setupCommandRepo = `cd ${repoName} &&
+                          yarn init -y &&
+                          yarn add -D concurrently &&
+                          yarn `;
 
 /**
  * CREATE
@@ -50,19 +54,31 @@ console.log(`✅ Installing dependencies success!`);
 
 const setupApi = runCommand(setupCommandApi);
 const setupWeb = runCommand(setupCommandWeb);
+const setupRepo = runCommand(setupCommandRepo);
 
-if (!setupApi || !setupWeb) {
+if (!setupApi || !setupWeb || !setupRepo) {
   process.exit(-1);
 }
 
 console.log(
   `
-🎉 Complete!
+🎉 Setup Complete!
 To get started, run:
 
-cd ${repoName}-web && yarn start
+> cd ${repoName}/web && yarn start
 // new terminal
-cd ${repoName}-api && yarn dev
+> cd ${repoName}/api && yarn dev
+
+
+OR:
+
+add this to package.json
+..
+"start": "concurrently \"cd web && yarn start\" \"cd api && yarn start\""
+..
+
+and then run:
+> yarn start
 
 🚀🚀🚀🚀
 `

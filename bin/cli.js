@@ -12,17 +12,22 @@ const runCommand = (command) => {
 };
 
 const repoName = process.argv[2];
-const gitCheckoutCommand = `git clone --depth=1 git@github.com:mjmcgrath2010/graphql-api-template.git ${repoName}`;
-const installCheckoutCommand = `cd ${repoName} && yarn install`;
-const setupCommand = `cd ${repoName} && yarn setup`;
+const gitApiCheckoutCommand = `git clone --depth=1 git@github.com:mjmcgrath2010/graphql-api-template.git ${repoName}-api`;
+const installCheckoutCommandApi = `cd ${repoName}-api && yarn install`;
+const setupCommandApi = `cd ${repoName}-api && yarn setup`;
+
+const gitCheckoutCommandWeb = `git clone --depth=1 git@github.com:mjmcgrath2010/material-ui-dashboard-template.git ${repoName}-web`;
+const installCheckoutCommandWeb = `cd ${repoName}-web && yarn install`;
+const setupCommandWeb = `cd ${repoName}-web && yarn setup`;
 
 /**
  * CREATE
  */
 
 console.log(`🛠 Creating ${repoName} graphql,express, mongo api.`);
-const checkout = runCommand(gitCheckoutCommand);
-if (!checkout) {
+const checkoutApi = runCommand(gitApiCheckoutCommand);
+const checkoutWeb = runCommand(gitCheckoutCommandWeb);
+if (!checkoutApi || !checkoutWeb) {
   process.exit(-1);
 }
 console.log(`✅ ${repoName} created success!`);
@@ -32,8 +37,9 @@ console.log(`✅ ${repoName} created success!`);
  */
 
 console.log(`⬇️ Installing dependencies`);
-const install = runCommand(installCheckoutCommand);
-if (!install) {
+const installApi = runCommand(installCheckoutCommandApi);
+const installWeb = runCommand(installCheckoutCommandWeb);
+if (!installApi || !installWeb) {
   process.exit(-1);
 }
 console.log(`✅ Installing dependencies success!`);
@@ -42,9 +48,10 @@ console.log(`✅ Installing dependencies success!`);
  *  Run Setup
  */
 
-const setup = runCommand(setupCommand);
+const setupApi = runCommand(setupCommandApi);
+const setupWeb = runCommand(setupCommandWeb);
 
-if (!setup) {
+if (!setupApi || !setupWeb) {
   process.exit(-1);
 }
 

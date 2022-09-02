@@ -1,6 +1,5 @@
 #! /usr/bin/env node
 const { execSync } = require("child_process");
-const chalk = require("chalk");
 
 const runCommand = (command) => {
   try {
@@ -27,6 +26,9 @@ const setupCommandWeb = `cd ${repoName}-web && yarn setup`;
  */
 
 const setup = runCommand(setupCommand);
+
+const chalk = require("chalk");
+
 if (!setup) {
   process.exit(-1);
 }

@@ -26,13 +26,13 @@ const setupCommandWeb = `cd ${repoName}-web && yarn setup`;
  */
 
 const setup = runCommand(setupCommand);
-if (!checkoutApi || !checkoutWeb) {
+if (!setup) {
   process.exit(-1);
 }
 console.log(chalk.blue(`🛠 Creating ${repoName} graphql,express, mongo api.`));
 const checkoutApi = runCommand(gitApiCheckoutCommand);
 const checkoutWeb = runCommand(gitCheckoutCommandWeb);
-if (!checkoutApi || !checkoutWeb || !setup) {
+if (!checkoutApi || !checkoutWeb) {
   process.exit(-1);
 }
 console.log(chalk.green(`✅ ${repoName} created success!`));

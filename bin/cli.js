@@ -1,5 +1,6 @@
 #! /usr/bin/env node
 const { execSync } = require("child_process");
+const chalk = require("chalk");
 
 const runCommand = (command) => {
   try {

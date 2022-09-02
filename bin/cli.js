@@ -6,13 +6,12 @@ const runCommand = (command) => {
     execSync(`${command}`, { stdio: "inherit" });
     return true;
   } catch (e) {
-    console.error(chalk.red(`❌ Error!`, e));
+    console.error(`❌ Error!`, e);
     return false;
   }
 };
 
 const repoName = process.argv[2];
-const setupCommand = `yarn`;
 const gitApiCheckoutCommand = `git clone --depth=1 git@github.com:mjmcgrath2010/graphql-api-template.git ${repoName}-api`;
 const installCheckoutCommandApi = `cd ${repoName}-api && yarn --silent`;
 const setupCommandApi = `cd ${repoName}-api && yarn setup`;
@@ -25,32 +24,25 @@ const setupCommandWeb = `cd ${repoName}-web && yarn setup`;
  * CREATE
  */
 
-const setup = runCommand(setupCommand);
-
-const chalk = require("chalk");
-
-if (!setup) {
-  process.exit(-1);
-}
-console.log(chalk.blue(`🛠 Creating ${repoName} graphql,express, mongo api.`));
+console.log(`🛠 Creating ${repoName} graphql,express, mongo api.`);
 const checkoutApi = runCommand(gitApiCheckoutCommand);
 const checkoutWeb = runCommand(gitCheckoutCommandWeb);
 if (!checkoutApi || !checkoutWeb) {
   process.exit(-1);
 }
-console.log(chalk.green(`✅ ${repoName} created success!`));
+console.log(`✅ ${repoName} created success!`);
 
 /**
  * INSTALL
  */
 
-console.log(chalk.blue(`⬇️ Installing dependencies`));
+console.log(`⬇️ Installing dependencies`);
 const installApi = runCommand(installCheckoutCommandApi);
 const installWeb = runCommand(installCheckoutCommandWeb);
 if (!installApi || !installWeb) {
   process.exit(-1);
 }
-console.log(chalk.green(`✅ Installing dependencies success!`));
+console.log(`✅ Installing dependencies success!`);
 
 /**
  *  Run Setup
@@ -64,7 +56,7 @@ if (!setupApi || !setupWeb) {
 }
 
 console.log(
-  chalk.green(`
+  `
 🎉 Complete!
 To get started, run:
 
@@ -73,5 +65,5 @@ cd ${repoName}-web && yarn start
 cd ${repoName}-api && yarn dev
 
 🚀🚀🚀🚀
-`)
+`
 );

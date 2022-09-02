@@ -23,7 +23,8 @@ const setupCommandRepo = `cd ${repoName} &&
                           yarn init -y &&
                           yarn add -D concurrently &&
                           yarn &&
-                          npm set-script start "concurrently \"cd web && yarn start\" \"cd api && yarn start\""`;
+                          npm pkg set scripts.start="concurrently \\"cd web && yarn start\\" \\"cd api && yarn start\\""
+                          `;
 
 /**
  * CREATE

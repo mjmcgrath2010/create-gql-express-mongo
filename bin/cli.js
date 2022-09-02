@@ -22,7 +22,8 @@ const setupCommandWeb = `cd ${repoName}/web && yarn setup`;
 const setupCommandRepo = `cd ${repoName} &&
                           yarn init -y &&
                           yarn add -D concurrently &&
-                          yarn `;
+                          yarn &&
+                          npm set-script start "concurrently \"cd web && yarn start\" \"cd api && yarn start\""`;
 
 /**
  * CREATE
@@ -65,19 +66,7 @@ console.log(
 🎉 Setup Complete!
 To get started, run:
 
-> cd ${repoName}/web && yarn start
-// new terminal
-> cd ${repoName}/api && yarn dev
-
-
-OR:
-
-add this to package.json
-..
-"start": "concurrently \"cd web && yarn start\" \"cd api && yarn start\""
-..
-
-and then run:
+> cd ${repoName}
 > yarn start
 
 🚀🚀🚀🚀
